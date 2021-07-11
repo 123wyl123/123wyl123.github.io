@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="ACWING-3516, zh-CN">
+    <meta name="keywords" content="LeetCode-1931 Painting a Grid With Three Different Colors, zh-CN">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>ACWING-3516 | 对也不对</title>
+    <title>LeetCode-1931 Painting a Grid With Three Different Colors | 对也不对</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">ACWING-3516</h1>
+                    <h1 class="description center-align post-title">LeetCode-1931 Painting a Grid With Three Different Colors</h1>
                 </div>
             </div>
         </div>
@@ -431,12 +431,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E7%AC%94%E8%AF%95/">
-                                <span class="chip bg-color">笔试</span>
+                            <a href="/tags/LeetCode/">
+                                <span class="chip bg-color">LeetCode</span>
                             </a>
                         
-                            <a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/">
-                                <span class="chip bg-color">单调栈</span>
+                            <a href="/tags/%E7%8A%B6%E5%8E%8BDP/">
+                                <span class="chip bg-color">状压DP</span>
                             </a>
                         
                     </div>
@@ -447,8 +447,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%8D%95%E8%B0%83%E6%A0%88/" class="post-category">
-                                单调栈
+                            <a href="/categories/LeetCode/" class="post-category">
+                                -LeetCode
                             </a>
                         
                     </div>
@@ -460,7 +460,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-05-17
+                    2021-07-11
                 </div>
                 
 
@@ -481,98 +481,40 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>[题目链接][1]<br>给定一个 N×M 的 01 矩阵，矩阵下标从 0 开始。</p>
-<p>有 Q 个询问，第 i 个询问为：将矩阵中 (xi,yi) 的元素改成 0 之后，只包含 1 的子矩阵的最大面积是多少。</p>
-<p>注意：</p>
-<p>1.每次询问均是独立的。<br>2.询问方格内元素可能本来就是 0。<br>3.子矩阵的面积是指矩阵的大小。<br>输入格式<br>第一行包含两个整数 N,M。</p>
-<p>接下来 N 行，每行包含 M 个 01 字符。</p>
-<p>再一行包含整数 Q。</p>
-<p>接下来 Q 行，每行包含 2 个整数 (xi,yi)。</p>
-<p>输出格式<br>每个询问输出一行一个结果，表示最大面积。</p>
-<p>数据范围<br>对于 20% 的数据，1≤N,M,Q≤10<br>对于 50% 的数据，1≤N,M,Q≤100<br>对于 100% 的数据，1≤N,M≤2000,1≤Q≤105, 0≤xi&lt;n,0≤yi&lt;m</p>
-<p>输入样例：<br>4 2<br>10<br>11<br>11<br>11<br>3<br>0 0<br>2 0<br>3 1<br>输出样例：<br>6<br>3<br>4</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>易知最大矩形必为给出点上下左右任意一个方向上，任取一点，其上方的图像类似于求直方图最大矩形面积，只不过这个问题里面的底边可以为该点上任意的边，所以我们需要枚举底边来求出上方的所有直方图最大矩形，用数组存取该点以上的最大值。类比四个方向，即可以求出答案</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>​```<br>import java.util.<em>;<br>import java.io.</em>;<br>public class Main{<br>    static int N = 2010;<br>    static int n, m;<br>    static char[][] g;<br>    static int[] l = new int[N], r = new int[N], q = new int[N];<br>    static int[] U = new int[N], D = new int[N], L = new int[N], R = new int[N];<br>    static int[][] s;<br>    public static void main(String[] args) throws Exception{<br>        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));<br>        String[] nm = br.readLine().split(“ “);<br>        n = Integer.parseInt(nm[0]);<br>        m = Integer.parseInt(nm[1]);<br>        g = new char[N][N];</p>
-<pre><code>    for(int i = 1; i &lt;= n; ++ i)&#123;
-        String str = br.readLine();
-        char[] temp = str.toCharArray();
-
-        for(int j = 1; j &lt;= m; ++ j) g[i][j] = temp[j - 1];
+                <hr>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/painting-a-grid-with-three-different-colors/">题目链接</a></p>
+<p>要使得任意两个相邻的格子的颜色均不相同，我们需要保证：<br>同一行内任意两个相邻格子的颜色互不相同；<br>相邻的两行之间，同一列上的两个格子的颜色互不相同。<br>因此，我们可以考虑：<br>首先通过枚举的方法，找出所有对一行进行涂色的方案数；<br>然后通过动态规划的方法，计算出对整个m×n 的方格进行涂色的方案数。</p>
+<p>我们首先枚举对一行进行涂色的方案数。</p>
+<p>对于我们可以选择红绿蓝三种颜色，我们可以将它们看成 0, 1, 2。这样一来，一种涂色方案就对应着一个长度为 m 的三进制数，其十进制的范围为 [0, 3^m)<br>因此，我们可以枚举 [0, 3^m)范围内的所有整数，将其转换为长度为 m 的三进制串，我通过DFS来枚举这个字符串，并且通过一个变量记录当前块的前一个块的颜色，把符合要求的方案（长度m的字符串）记到链表中。</p>
+<p>然后枚举string,用一个MAP存取符合配对关系（颜色不冲突）的行。只要 j与j1同一数位上的数字都不相同<br>我们用 bb[i][j]表示我们已经对 0, 1,⋯,i 行进行了涂色，并且第 i 行的涂色方案对应的三进制表示为 j 的前提下的总方案数<br>bb[i][j]=∑bb[i-1][j1];<br>        Map对应符号配对要求的行</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>​```<br>  int mm=0;<br>    static int mod = (int) 1e9 + 7;<br>    LinkedList<String> strings = new LinkedList&lt;&gt;();<br>    public int colorTheGrid(int m, int n) {<br>        mm=m;<br>        char b[]=new char[m];<br>        dfs(0,-1,b);<br>        HashMap&lt;Integer, LinkedList<Integer>&gt; integerLinkedListHashMap = new HashMap&lt;Integer, LinkedList<Integer>&gt;();<br>        for (int i = 0; i &lt;strings.size() ; i++) {<br>            for (int j = 0; j &lt;strings.size() ; j++) {<br>                String s = strings.get(i);<br>                String s1 = strings.get(j);<br>                boolean flag =true;<br>                for (int k = 0; k &lt;s.length() ; k++) {<br>                    if (s1.charAt(k)==s.charAt(k))<br>                    {   flag = false;<br>                        break;<br>                    }<br>                }<br>                if (!flag)<br>                {<br>                   continue;<br>                }<br>                if (integerLinkedListHashMap.containsKey(i))<br>                {<br>                    LinkedList linkedList = integerLinkedListHashMap.get(i);<br>                    linkedList.addLast(j);<br>                    integerLinkedListHashMap.put(i,linkedList);<br>                }else<br>                {<br>                    LinkedList<Integer> integers = new LinkedList&lt;&gt;();<br>                    integers.addLast(j);<br>                    integerLinkedListHashMap.put(i,integers);<br>                }<br>            }<br>        }<br>        long bb[][]=new long[n][strings.size()];<br>        for (int i = 0; i &lt;strings.size() ; i++) {<br>            bb[0][i]=1;<br>        }<br>        for (int i = 1; i &lt;n ; i++) {<br>            for (int j = 0; j &lt;strings.size() ; j++) {</p>
+<pre><code>            LinkedList&lt;Integer&gt; linkedList = integerLinkedListHashMap.get(j);
+            for (Integer integer : linkedList) &#123;
+                bb[i][j]=(bb[i][j]+bb[i-1][integer])%mod ;
+            &#125;
+        &#125;
     &#125;
-    init();
-    int num = Integer.parseInt(br.readLine());
-    while(num -- &gt; 0)&#123;
-        String[] temp = br.readLine().split(&quot; &quot;);
-        //加一个偏移量
-        int x = Integer.parseInt(temp[0]) + 1, y = Integer.parseInt(temp[1]) + 1;
-        int max = Math.max(Math.max(U[x - 1], D[x + 1]), Math.max(L[y - 1], R[y + 1]));
-        System.out.println(max);
-    &#125;
-
+    long sum =0;
+    for (int i = 0; i &lt;strings.size() ; i++) &#123;
+        sum=(sum+bb[n-1][i])%mod;
+    &#125;</code></pre>
+<p>return (int)(sum%mod);<br>    }</p>
+<pre><code>public void dfs(int n,int c,char b[])
+&#123;   if (n==mm)
+&#123;
+  strings.addLast(  new String(b));
+  return;
 &#125;
-//预处理4个方向最大矩阵
-public static void init()&#123;
-    s = new int[N][N];
-    for (int i = 1; i &lt;= n; i ++ )&#123;
-        for (int j = 1; j &lt;= m; j ++ )
-            if (g[i][j] == &#39;1&#39;) s[i][j] = s[i - 1][j] + 1;
-            else s[i][j] = 0;
-        U[i] = Math.max(U[i - 1], calc(s[i], m));
+    for (int j = 0; j &lt;3 ; j++) &#123;
+        if (c==j)
+        &#123;
+            continue;
+        &#125;
+        b[n]=(char) (&#39;0&#39;+j);
+        dfs(n+1,j,b);
     &#125;
-    //情况预处理数组
-    s = new int[N][N];
-    for (int i = n; i &gt; 0; i -- )&#123;
-        for (int j = 1; j &lt;= m; j ++ )
-            if (g[i][j] == &#39;1&#39;) s[i][j] = s[i + 1][j] + 1;
-            else s[i][j] = 0;
-        D[i] = Math.max(D[i + 1], calc(s[i], m));
-    &#125;
-    s = new int[N][N];
-    for (int i = 1; i &lt;= m; i ++ )&#123;
-        for (int j = 1; j &lt;= n; j ++ )
-            if (g[j][i] == &#39;1&#39;) s[i][j] = s[i - 1][j] + 1;
-            else s[i][j] = 0;
-        L[i] = Math.max(L[i - 1], calc(s[i], n));
-    &#125;
-
-    s = new int[N][N];
-    for (int i = m; i &gt; 0; i -- )&#123;
-        for (int j = 1; j &lt;= n; j ++ )
-            if (g[j][i] == &#39;1&#39;) s[i][j] = s[i + 1][j] + 1;
-            else s[i][j] = 0;
-        R[i] = Math.max(R[i + 1], calc(s[i], n));
-    &#125;
-&#125;
-
-//计算矩形最大面积
-private static int calc(int[] h, int n)&#123;
-    h[0] = h[n + 1] = -1;
-
-    int tt = 0;
-    q[0] = 0;
-    for (int i = 1; i &lt;= n; i ++ )
-    &#123;
-        while (h[q[tt]] &gt;= h[i]) tt -- ;
-        l[i] = q[tt];
-        q[ ++ tt] = i;
-    &#125;
-
-    tt = 0;
-    q[0] = n + 1;
-    for (int i = n; i &gt; 0; i -- )
-    &#123;
-        while (h[q[tt]] &gt;= h[i]) tt -- ;
-        r[i] = q[tt];
-        q[ ++ tt] = i;
-    &#125;
-
-    int res = 0;
-    for (int i = 1; i &lt;= n; i ++ )
-        res = Math.max(res, h[i] * (r[i] - l[i] - 1));
-    return res;
 &#125;</code></pre>
-<p>}</p>
-<p>​```<br>[1]: <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/house-robber-iii/">https://leetcode-cn.com/problems/house-robber-iii/</a></p>
+<p>​```</p>
 
                 
             </div>
@@ -599,7 +541,7 @@ private static int calc(int[] h, int n)&#123;
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://123wyl123.github.io/2021/05/17/ACWING-3516/">https://123wyl123.github.io/2021/05/17/ACWING-3516/</a>
+                    <a href="https://123wyl123.github.io/2021/07/11/LeetCode-1931-Painting-a-Grid-With-Three-Different-Colors/">https://123wyl123.github.io/2021/07/11/LeetCode-1931-Painting-a-Grid-With-Three-Different-Colors/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -637,12 +579,12 @@ private static int calc(int[] h, int n)&#123;
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E7%AC%94%E8%AF%95/">
-                                    <span class="chip bg-color">笔试</span>
+                                <a href="/tags/LeetCode/">
+                                    <span class="chip bg-color">LeetCode</span>
                                 </a>
                             
-                                <a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/">
-                                    <span class="chip bg-color">单调栈</span>
+                                <a href="/tags/%E7%8A%B6%E5%8E%8BDP/">
+                                    <span class="chip bg-color">状压DP</span>
                                 </a>
                             
                         </div>
@@ -814,9 +756,10 @@ private static int calc(int[] h, int n)&#123;
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2021/07/11/LeetCode-1931-Painting-a-Grid-With-Three-Different-Colors/">
                     <div class="card-image">
@@ -834,9 +777,9 @@ private static int calc(int[] h, int n)&#123;
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-07-11
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-11
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -849,6 +792,7 @@ private static int calc(int[] h, int n)&#123;
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -871,13 +815,13 @@ private static int calc(int[] h, int n)&#123;
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/04/22/363-%E7%9F%A9%E5%BD%A2%E5%8C%BA%E5%9F%9F%E4%B8%8D%E8%B6%85%E8%BF%87-K-%E7%9A%84%E6%9C%80%E5%A4%A7%E6%95%B0%E5%80%BC%E5%92%8C/">
+                <a href="/2021/05/17/ACWING-3516/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="363. 矩形区域不超过 K 的最大数值和">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="ACWING-3516">
                         
-                        <span class="card-title">363. 矩形区域不超过 K 的最大数值和</span>
+                        <span class="card-title">ACWING-3516</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -888,14 +832,14 @@ private static int calc(int[] h, int n)&#123;
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-22
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-17
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/LeetCode/" class="post-category">
-                                    -LeetCode
+                            <a href="/categories/%E5%8D%95%E8%B0%83%E6%A0%88/" class="post-category">
+                                    单调栈
                                 </a>
                             
                             
@@ -905,12 +849,12 @@ private static int calc(int[] h, int n)&#123;
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/LeetCode/">
-                        <span class="chip bg-color">LeetCode</span>
+                    <a href="/tags/%E7%AC%94%E8%AF%95/">
+                        <span class="chip bg-color">笔试</span>
                     </a>
                     
-                    <a href="/tags/%E4%BA%8C%E4%BD%8D%E5%89%8D%E7%BC%80%E5%92%8C/">
-                        <span class="chip bg-color">二位前缀和</span>
+                    <a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/">
+                        <span class="chip bg-color">单调栈</span>
                     </a>
                     
                 </div>
