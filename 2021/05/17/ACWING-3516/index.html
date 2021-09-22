@@ -481,7 +481,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>[题目链接][1]<br>给定一个 N×M 的 01 矩阵，矩阵下标从 0 开始。</p>
+                <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/house-robber-iii/">题目链接</a><br>给定一个 N×M 的 01 矩阵，矩阵下标从 0 开始。</p>
 <p>有 Q 个询问，第 i 个询问为：将矩阵中 (xi,yi) 的元素改成 0 之后，只包含 1 的子矩阵的最大面积是多少。</p>
 <p>注意：</p>
 <p>1.每次询问均是独立的。<br>2.询问方格内元素可能本来就是 0。<br>3.子矩阵的面积是指矩阵的大小。<br>输入格式<br>第一行包含两个整数 N,M。</p>
@@ -492,87 +492,8 @@
 <p>数据范围<br>对于 20% 的数据，1≤N,M,Q≤10<br>对于 50% 的数据，1≤N,M,Q≤100<br>对于 100% 的数据，1≤N,M≤2000,1≤Q≤105, 0≤xi&lt;n,0≤yi&lt;m</p>
 <p>输入样例：<br>4 2<br>10<br>11<br>11<br>11<br>3<br>0 0<br>2 0<br>3 1<br>输出样例：<br>6<br>3<br>4</p>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>易知最大矩形必为给出点上下左右任意一个方向上，任取一点，其上方的图像类似于求直方图最大矩形面积，只不过这个问题里面的底边可以为该点上任意的边，所以我们需要枚举底边来求出上方的所有直方图最大矩形，用数组存取该点以上的最大值。类比四个方向，即可以求出答案</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>​```<br>import java.util.<em>;<br>import java.io.</em>;<br>public class Main{<br>    static int N = 2010;<br>    static int n, m;<br>    static char[][] g;<br>    static int[] l = new int[N], r = new int[N], q = new int[N];<br>    static int[] U = new int[N], D = new int[N], L = new int[N], R = new int[N];<br>    static int[][] s;<br>    public static void main(String[] args) throws Exception{<br>        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));<br>        String[] nm = br.readLine().split(“ “);<br>        n = Integer.parseInt(nm[0]);<br>        m = Integer.parseInt(nm[1]);<br>        g = new char[N][N];</p>
-<pre><code>    for(int i = 1; i &lt;= n; ++ i)&#123;
-        String str = br.readLine();
-        char[] temp = str.toCharArray();
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">import java.util.*;</span><br><span class="line">import java.io.*;</span><br><span class="line">public class Main&#123;</span><br><span class="line">    static int N &#x3D; 2010;</span><br><span class="line">    static int n, m;</span><br><span class="line">    static char[][] g;</span><br><span class="line">    static int[] l &#x3D; new int[N], r &#x3D; new int[N], q &#x3D; new int[N];</span><br><span class="line">    static int[] U &#x3D; new int[N], D &#x3D; new int[N], L &#x3D; new int[N], R &#x3D; new int[N];</span><br><span class="line">    static int[][] s;</span><br><span class="line">    public static void main(String[] args) throws Exception&#123;</span><br><span class="line">        BufferedReader br &#x3D; new BufferedReader(new InputStreamReader(System.in));</span><br><span class="line">        String[] nm &#x3D; br.readLine().split(&quot; &quot;);</span><br><span class="line">        n &#x3D; Integer.parseInt(nm[0]);</span><br><span class="line">        m &#x3D; Integer.parseInt(nm[1]);</span><br><span class="line">        g &#x3D; new char[N][N];</span><br><span class="line"></span><br><span class="line">        for(int i &#x3D; 1; i &lt;&#x3D; n; ++ i)&#123;</span><br><span class="line">            String str &#x3D; br.readLine();</span><br><span class="line">            char[] temp &#x3D; str.toCharArray();</span><br><span class="line"></span><br><span class="line">            for(int j &#x3D; 1; j &lt;&#x3D; m; ++ j) g[i][j] &#x3D; temp[j - 1];</span><br><span class="line">        &#125;</span><br><span class="line">        init();</span><br><span class="line">        int num &#x3D; Integer.parseInt(br.readLine());</span><br><span class="line">        while(num -- &gt; 0)&#123;</span><br><span class="line">            String[] temp &#x3D; br.readLine().split(&quot; &quot;);</span><br><span class="line">            &#x2F;&#x2F;加一个偏移量</span><br><span class="line">            int x &#x3D; Integer.parseInt(temp[0]) + 1, y &#x3D; Integer.parseInt(temp[1]) + 1;</span><br><span class="line">            int max &#x3D; Math.max(Math.max(U[x - 1], D[x + 1]), Math.max(L[y - 1], R[y + 1]));</span><br><span class="line">            System.out.println(max);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;预处理4个方向最大矩阵</span><br><span class="line">    public static void init()&#123;</span><br><span class="line">        s &#x3D; new int[N][N];</span><br><span class="line">        for (int i &#x3D; 1; i &lt;&#x3D; n; i ++ )&#123;</span><br><span class="line">            for (int j &#x3D; 1; j &lt;&#x3D; m; j ++ )</span><br><span class="line">                if (g[i][j] &#x3D;&#x3D; &#39;1&#39;) s[i][j] &#x3D; s[i - 1][j] + 1;</span><br><span class="line">                else s[i][j] &#x3D; 0;</span><br><span class="line">            U[i] &#x3D; Math.max(U[i - 1], calc(s[i], m));</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F;情况预处理数组</span><br><span class="line">        s &#x3D; new int[N][N];</span><br><span class="line">        for (int i &#x3D; n; i &gt; 0; i -- )&#123;</span><br><span class="line">            for (int j &#x3D; 1; j &lt;&#x3D; m; j ++ )</span><br><span class="line">                if (g[i][j] &#x3D;&#x3D; &#39;1&#39;) s[i][j] &#x3D; s[i + 1][j] + 1;</span><br><span class="line">                else s[i][j] &#x3D; 0;</span><br><span class="line">            D[i] &#x3D; Math.max(D[i + 1], calc(s[i], m));</span><br><span class="line">        &#125;</span><br><span class="line">        s &#x3D; new int[N][N];</span><br><span class="line">        for (int i &#x3D; 1; i &lt;&#x3D; m; i ++ )&#123;</span><br><span class="line">            for (int j &#x3D; 1; j &lt;&#x3D; n; j ++ )</span><br><span class="line">                if (g[j][i] &#x3D;&#x3D; &#39;1&#39;) s[i][j] &#x3D; s[i - 1][j] + 1;</span><br><span class="line">                else s[i][j] &#x3D; 0;</span><br><span class="line">            L[i] &#x3D; Math.max(L[i - 1], calc(s[i], n));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        s &#x3D; new int[N][N];</span><br><span class="line">        for (int i &#x3D; m; i &gt; 0; i -- )&#123;</span><br><span class="line">            for (int j &#x3D; 1; j &lt;&#x3D; n; j ++ )</span><br><span class="line">                if (g[j][i] &#x3D;&#x3D; &#39;1&#39;) s[i][j] &#x3D; s[i + 1][j] + 1;</span><br><span class="line">                else s[i][j] &#x3D; 0;</span><br><span class="line">            R[i] &#x3D; Math.max(R[i + 1], calc(s[i], n));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;计算矩形最大面积</span><br><span class="line">    private static int calc(int[] h, int n)&#123;</span><br><span class="line">        h[0] &#x3D; h[n + 1] &#x3D; -1;</span><br><span class="line"></span><br><span class="line">        int tt &#x3D; 0;</span><br><span class="line">        q[0] &#x3D; 0;</span><br><span class="line">        for (int i &#x3D; 1; i &lt;&#x3D; n; i ++ )</span><br><span class="line">        &#123;</span><br><span class="line">            while (h[q[tt]] &gt;&#x3D; h[i]) tt -- ;</span><br><span class="line">            l[i] &#x3D; q[tt];</span><br><span class="line">            q[ ++ tt] &#x3D; i;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        tt &#x3D; 0;</span><br><span class="line">        q[0] &#x3D; n + 1;</span><br><span class="line">        for (int i &#x3D; n; i &gt; 0; i -- )</span><br><span class="line">        &#123;</span><br><span class="line">            while (h[q[tt]] &gt;&#x3D; h[i]) tt -- ;</span><br><span class="line">            r[i] &#x3D; q[tt];</span><br><span class="line">            q[ ++ tt] &#x3D; i;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        int res &#x3D; 0;</span><br><span class="line">        for (int i &#x3D; 1; i &lt;&#x3D; n; i ++ )</span><br><span class="line">            res &#x3D; Math.max(res, h[i] * (r[i] - l[i] - 1));</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-        for(int j = 1; j &lt;= m; ++ j) g[i][j] = temp[j - 1];
-    &#125;
-    init();
-    int num = Integer.parseInt(br.readLine());
-    while(num -- &gt; 0)&#123;
-        String[] temp = br.readLine().split(&quot; &quot;);
-        //加一个偏移量
-        int x = Integer.parseInt(temp[0]) + 1, y = Integer.parseInt(temp[1]) + 1;
-        int max = Math.max(Math.max(U[x - 1], D[x + 1]), Math.max(L[y - 1], R[y + 1]));
-        System.out.println(max);
-    &#125;
-
-&#125;
-//预处理4个方向最大矩阵
-public static void init()&#123;
-    s = new int[N][N];
-    for (int i = 1; i &lt;= n; i ++ )&#123;
-        for (int j = 1; j &lt;= m; j ++ )
-            if (g[i][j] == &#39;1&#39;) s[i][j] = s[i - 1][j] + 1;
-            else s[i][j] = 0;
-        U[i] = Math.max(U[i - 1], calc(s[i], m));
-    &#125;
-    //情况预处理数组
-    s = new int[N][N];
-    for (int i = n; i &gt; 0; i -- )&#123;
-        for (int j = 1; j &lt;= m; j ++ )
-            if (g[i][j] == &#39;1&#39;) s[i][j] = s[i + 1][j] + 1;
-            else s[i][j] = 0;
-        D[i] = Math.max(D[i + 1], calc(s[i], m));
-    &#125;
-    s = new int[N][N];
-    for (int i = 1; i &lt;= m; i ++ )&#123;
-        for (int j = 1; j &lt;= n; j ++ )
-            if (g[j][i] == &#39;1&#39;) s[i][j] = s[i - 1][j] + 1;
-            else s[i][j] = 0;
-        L[i] = Math.max(L[i - 1], calc(s[i], n));
-    &#125;
-
-    s = new int[N][N];
-    for (int i = m; i &gt; 0; i -- )&#123;
-        for (int j = 1; j &lt;= n; j ++ )
-            if (g[j][i] == &#39;1&#39;) s[i][j] = s[i + 1][j] + 1;
-            else s[i][j] = 0;
-        R[i] = Math.max(R[i + 1], calc(s[i], n));
-    &#125;
-&#125;
-
-//计算矩形最大面积
-private static int calc(int[] h, int n)&#123;
-    h[0] = h[n + 1] = -1;
-
-    int tt = 0;
-    q[0] = 0;
-    for (int i = 1; i &lt;= n; i ++ )
-    &#123;
-        while (h[q[tt]] &gt;= h[i]) tt -- ;
-        l[i] = q[tt];
-        q[ ++ tt] = i;
-    &#125;
-
-    tt = 0;
-    q[0] = n + 1;
-    for (int i = n; i &gt; 0; i -- )
-    &#123;
-        while (h[q[tt]] &gt;= h[i]) tt -- ;
-        r[i] = q[tt];
-        q[ ++ tt] = i;
-    &#125;
-
-    int res = 0;
-    for (int i = 1; i &lt;= n; i ++ )
-        res = Math.max(res, h[i] * (r[i] - l[i] - 1));
-    return res;
-&#125;</code></pre>
-<p>}</p>
-<p>​```<br>[1]: <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/house-robber-iii/">https://leetcode-cn.com/problems/house-robber-iii/</a></p>
 
                 
             </div>
